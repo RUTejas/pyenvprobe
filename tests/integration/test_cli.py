@@ -22,7 +22,7 @@ def test_cli_version(capsys: pytest.CaptureFixture[str]) -> None:
         main(["--version"])
     assert exc_info.value.code == 0
     captured = capsys.readouterr()
-    assert "pyenvprobe 0.3.0" in captured.out
+    assert "pyenvprobe 0.4.0" in captured.out
 
 
 def test_cli_invalid_path(capsys: pytest.CaptureFixture[str]) -> None:

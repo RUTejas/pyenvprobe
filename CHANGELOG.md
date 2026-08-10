@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-08-11
+
+### Added
+- **AI Test Generator (`PD402`)**: The AI auto-fix engine now detects untested Python source files and dynamically generates complete `pytest` unit test suites for them in the `tests/` directory.
+- **Cross-Platform Testing Matrix**: The CI pipeline now strictly tests pyenvprobe across Ubuntu Linux, macOS, and Windows for all Python versions 3.9 through 3.13, ensuring perfect cross-platform compatibility.
+
 ## [0.3.0] - 2026-08-11
 
 ### Added

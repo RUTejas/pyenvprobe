@@ -1,7 +1,7 @@
 # pyenvprobe
 
-[![PyPI version](https://img.shields.io/pypi/v/pyenvprobe.svg)](https://pypi.org/project/pyenvprobe/)
-[![Python versions](https://img.shields.io/pypi/pyversions/pyenvprobe.svg)](https://pypi.org/project/pyenvprobe/)
+[![PyPI version](https://img.shields.io/pypi/v/pyenvprobe.svg?v=0.4.0)](https://pypi.org/project/pyenvprobe/)
+[![Python versions](https://img.shields.io/pypi/pyversions/pyenvprobe.svg?v=0.4.0)](https://pypi.org/project/pyenvprobe/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
