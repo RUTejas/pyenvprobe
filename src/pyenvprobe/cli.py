@@ -113,7 +113,9 @@ def main(argv: list[str] | None = None) -> int:
 
     # 6. Apply fixes if requested
     if args.fix:
-        fixable_results = [r for r in results if r.fixable and r.status in (Status.WARN, Status.FAIL)]
+        fixable_results = [
+            r for r in results if r.fixable and r.status in (Status.WARN, Status.FAIL)
+        ]
         if fixable_results:
             print("\n" + "=" * 32)
             print("Auto-Fix Interactive Mode")

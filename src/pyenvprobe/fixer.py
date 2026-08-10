@@ -38,18 +38,20 @@ ehthumbs.db
 Thumbs.db
 """
 
+
 def init_git_repo(context: ProjectContext) -> str | None:
     try:
         subprocess.run(
-            ["git", "init"], 
-            cwd=context.root_path, 
-            check=True, 
-            capture_output=True, 
-            text=True
+            ["git", "init"],
+            cwd=context.root_path,
+            check=True,
+            capture_output=True,
+            text=True,
         )
         return "Initialized an empty Git repository."
     except Exception as e:
         return f"Failed to initialize Git repository: {e}"
+
 
 def create_gitignore(context: ProjectContext) -> str | None:
     path = context.root_path / ".gitignore"
@@ -62,7 +64,10 @@ def create_gitignore(context: ProjectContext) -> str | None:
     except Exception as e:
         return f"Failed to create .gitignore: {e}"
 
-def append_to_gitignore(context: ProjectContext, paths_to_ignore: list[str]) -> str | None:
+
+def append_to_gitignore(
+    context: ProjectContext, paths_to_ignore: list[str]
+) -> str | None:
     path = context.root_path / ".gitignore"
     try:
         if not path.exists():
@@ -75,6 +80,7 @@ def append_to_gitignore(context: ProjectContext, paths_to_ignore: list[str]) -> 
     except Exception as e:
         return f"Failed to append to .gitignore: {e}"
 
+
 def create_tests_dir(context: ProjectContext) -> str | None:
     path = context.root_path / "tests"
     if path.exists():
@@ -85,6 +91,7 @@ def create_tests_dir(context: ProjectContext) -> str | None:
         return "Created tests/ directory with __init__.py."
     except Exception as e:
         return f"Failed to create tests directory: {e}"
+
 
 def apply_fix(context: ProjectContext, result: CheckResult) -> str | None:
     """Applies the fix corresponding to the check ID and returns a success message or error."""
@@ -106,5 +113,5 @@ def apply_fix(context: ProjectContext, result: CheckResult) -> str | None:
         return append_to_gitignore(context, exposed) if exposed else None
     elif result.id == "PD103":
         return create_tests_dir(context)
-    
+
     return None
