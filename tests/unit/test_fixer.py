@@ -10,6 +10,7 @@ from pyenvprobe.fixer import (
 )
 from pyenvprobe.models import ProjectContext
 
+
 @patch("pyenvprobe.fixer.subprocess.run")
 def test_init_git_repo(mock_run):
     with tempfile.TemporaryDirectory() as td:
