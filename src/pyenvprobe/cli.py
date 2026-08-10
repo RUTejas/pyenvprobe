@@ -130,7 +130,7 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"Message: {res.message}")
                 ans = input("Apply this fix? [y/N]: ").strip().lower()
                 if ans in ("y", "yes"):
-                    if args.ai and res.id in ("PD301", "PD303", "PD403"):
+                    if args.ai and res.id in ("PD301", "PD303", "PD402", "PD403"):
                         # Route to AI fixer
                         try:
                             from pyenvprobe.ai import apply_ai_fix

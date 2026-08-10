@@ -48,6 +48,7 @@ def test_cli_run_success(
     )
     (temp_project / "LICENSE").write_text("MIT License")
     (temp_project / "tests").mkdir()
+    (temp_project / "tests" / "test_main.py").write_text("def test_foo(): pass")
     (temp_project / ".git").mkdir()
     (temp_project / ".gitignore").write_text("__pycache__/")
 
@@ -57,7 +58,7 @@ def test_cli_run_success(
     captured = capsys.readouterr()
     assert "pyenvprobe Checkup" in captured.out
     assert "Python files detected" in captured.out
-    assert "100/100" in captured.out
+    assert "98/100" in captured.out
 
 
 def test_cli_json_output(

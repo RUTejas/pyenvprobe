@@ -30,7 +30,7 @@ from pyenvprobe.checks.structure import (
     check_requirements_txt,
     check_tests_dir,
 )
-from pyenvprobe.checks.testing import check_testing_config
+from pyenvprobe.checks.testing import check_missing_tests, check_testing_config
 from pyenvprobe.checks.tooling import check_tooling_config
 from pyenvprobe.models import CheckResult, ProjectContext
 
@@ -55,6 +55,7 @@ ALL_CHECKS: list[Callable[[ProjectContext], list[CheckResult]]] = [
     check_readme_contents,
     # Testing
     check_testing_config,
+    check_missing_tests,
     # Tooling
     check_tooling_config,
     # Dependencies / hygiene / security

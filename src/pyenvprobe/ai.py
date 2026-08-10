@@ -108,6 +108,58 @@ class PyEnvProbeAI:
         except Exception as e:
             return f"AI Generation failed: {e}"
 
+    def generate_tests(
+        self, context: ProjectContext, untested_files: list[str]
+    ) -> str | None:
+        """Generates unit tests for files missing them using AI."""
+        try:
+            tests_dir = context.root_path / "tests"
+            tests_dir.mkdir(exist_ok=True)
+
+            generated_files = []
+            for src_file in untested_files[
+                :3
+            ]:  # Limit to 3 files to avoid hitting token limits
+                full_path = context.root_path / src_file
+                filename = full_path.name
+
+                with open(full_path, encoding="utf-8") as f:
+                    source_code = f.read()
+
+                prompt = f"Write a robust, complete test suite using `pytest` for the following Python file ({filename}).\n\n"
+                prompt += f"```python\n{source_code}\n```\n\n"
+                prompt += "Only output the Python code for the test file. Do not include markdown codeblocks or any other text. Start your response directly with the imports."
+
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "user", "content": prompt},
+                    ],
+                    temperature=0.2,
+                )
+
+                content = response.choices[0].message.content
+                if content:
+                    content = content.strip()
+                    if content.startswith("```python"):
+                        content = content[9:]
+                    if content.endswith("```"):
+                        content = content[:-3]
+                    content = content.strip()
+
+                    test_filename = f"test_{filename}"
+                    test_path = tests_dir / test_filename
+                    with open(test_path, "w", encoding="utf-8") as f:
+                        f.write(content + "\n")
+                    generated_files.append(test_filename)
+
+            if generated_files:
+                return f"Successfully generated {len(generated_files)} test files: {', '.join(generated_files)}."
+            return "Failed to generate any test files."
+        except Exception as e:
+            return f"AI Test Generation failed: {e}"
+
 
 def apply_ai_fix(context: ProjectContext, result: CheckResult) -> str | None:
     try:
@@ -121,4 +173,8 @@ def apply_ai_fix(context: ProjectContext, result: CheckResult) -> str | None:
         missing_nodes = result.metadata.get("missing_docstrings", [])
         if missing_nodes:
             return ai.generate_docstrings(context, missing_nodes)
+    elif result.id == "PD402":
+        untested_files = result.metadata.get("untested_files", [])
+        if untested_files:
+            return ai.generate_tests(context, untested_files)
     return None
