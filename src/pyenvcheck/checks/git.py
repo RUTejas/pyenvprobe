@@ -89,21 +89,18 @@ def check_caches_gitignored(context: ProjectContext) -> list[CheckResult]:
     for d in context.dirs:
         # Check if the directory name matches any common cache
         parts = d.split("/")
-        if any(part in COMMON_CACHES_DIRS for part in parts):
-            # Check if ignored
-            if not has_gitignore or (
-                matcher and not matcher.is_ignored(d, is_dir=True)
-            ):
-                unignored.append(f"{d}/")
+        if any(part in COMMON_CACHES_DIRS for part in parts) and (
+            not has_gitignore or (matcher and not matcher.is_ignored(d, is_dir=True))
+        ):
+            unignored.append(f"{d}/")
 
     # Check files
     for f in context.files:
         filename = f.split("/")[-1]
-        if filename in COMMON_CACHES_FILES:
-            if not has_gitignore or (
-                matcher and not matcher.is_ignored(f, is_dir=False)
-            ):
-                unignored.append(f)
+        if filename in COMMON_CACHES_FILES and (not has_gitignore or (
+            matcher and not matcher.is_ignored(f, is_dir=False)
+        )):
+            unignored.append(f)
 
     if unignored:
         unignored_str = ", ".join(unignored)

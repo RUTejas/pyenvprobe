@@ -53,9 +53,7 @@ def is_unpinned(dep_spec: str) -> bool:
     if any(op in dep_spec for op in VERSION_OPERATORS):
         return False
     # Ignore editable installs or git URLs
-    if dep_spec.startswith(".") or "git+" in dep_spec or "://" in dep_spec:
-        return False
-    return True
+    return not (dep_spec.startswith(".") or "git+" in dep_spec or "://" in dep_spec)
 
 
 def check_dependencies_defined(context: ProjectContext) -> list[CheckResult]:
@@ -183,29 +181,26 @@ def check_unwanted_files(context: ProjectContext) -> list[CheckResult]:
     # Check files
     for f in context.files:
         filename = f.split("/")[-1]
-        if any(re.match(pat, filename) for pat in UNWANTED_PATTERNS):
-            if not has_gitignore or (
-                matcher and not matcher.is_ignored(f, is_dir=False)
-            ):
-                unwanted.append(f)
+        if any(re.match(pat, filename) for pat in UNWANTED_PATTERNS) and (
+            not has_gitignore or (matcher and not matcher.is_ignored(f, is_dir=False))
+        ):
+            unwanted.append(f)
 
     # Check directories
     for d in context.dirs:
         parts = d.split("/")
-        if any(part in UNWANTED_DIRS for part in parts):
-            if not has_gitignore or (
-                matcher and not matcher.is_ignored(d, is_dir=True)
-            ):
-                unwanted.append(f"{d}/")
+        if any(part in UNWANTED_DIRS for part in parts) and (
+            not has_gitignore or (matcher and not matcher.is_ignored(d, is_dir=True))
+        ):
+            unwanted.append(f"{d}/")
 
     # Egg info check
     for d in context.dirs:
         parts = d.split("/")
-        if any(part.endswith(".egg-info") for part in parts):
-            if not has_gitignore or (
-                matcher and not matcher.is_ignored(d, is_dir=True)
-            ):
-                unwanted.append(f"{d}/")
+        if any(part.endswith(".egg-info") for part in parts) and (
+            not has_gitignore or (matcher and not matcher.is_ignored(d, is_dir=True))
+        ):
+            unwanted.append(f"{d}/")
 
     if unwanted:
         unwanted_str = ", ".join(unwanted)
@@ -286,11 +281,10 @@ def check_secrets_exposed(context: ProjectContext) -> list[CheckResult]:
     exposed = []
     for f in context.files:
         filename = f.split("/")[-1]
-        if any(re.match(pat, filename, re.IGNORECASE) for pat in SECRET_PATTERNS):
-            if not has_gitignore or (
-                matcher and not matcher.is_ignored(f, is_dir=False)
-            ):
-                exposed.append(f)
+        if any(re.match(pat, filename, re.IGNORECASE) for pat in SECRET_PATTERNS) and (
+            not has_gitignore or (matcher and not matcher.is_ignored(f, is_dir=False))
+        ):
+            exposed.append(f)
 
     if exposed:
         exposed_str = ", ".join(exposed)
