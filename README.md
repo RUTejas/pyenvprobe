@@ -26,6 +26,11 @@ Install `pyenvprobe` with `pip`:
 pip install pyenvprobe
 ```
 
+To enable **Smart AI Auto-Fixes**, install with the `ai` extra:
+```bash
+pip install pyenvprobe[ai]
+```
+
 ---
 
 ## Basic Usage
@@ -71,6 +76,8 @@ print(f"Project Health Score: {score}/100")
 - `-v, --verbose`: Print detailed diagnostic explanations and recommendations for all checks.
 - `-q, --quiet`: Suppress all normal stdout output.
 - `--json`: Output check results in structured, stable JSON.
+- `--fix`: Interactively prompt to automatically resolve supported issues (like generating `.gitignore` or `tests/`).
+- `--ai`: Supercharges `--fix` with Smart AI Auto-Fixes. Generates missing docstrings and READMEs by analyzing your codebase context. Requires `PYENVPROBE_API_KEY` (or `OPENAI_API_KEY`) in your environment.
 - `--ci`: Run in Continuous Integration mode (affects exit codes).
 - `--threshold <int>`: Target minimum health score to pass in CI mode (default: `80`).
 - `--category <category_name>`: Only run checks in a specific category (e.g. `git`, `documentation`). Specify multiple times or as comma-separated values to select multiple categories.
@@ -166,8 +173,8 @@ Project health: 100/100
 ## Security & Privacy
 
 `pyenvprobe` is built with a security-first philosophy:
-- **Local-Only**: All checks run locally on your machine. No source code or file contents are sent to external servers.
-- **Read-Only**: The tool will never modify, create, delete, or overwrite any of your project files.
+- **Local-Only**: All checks run locally on your machine. By default, no source code or file contents are sent to external servers. If you explicitly use the `--ai` flag, only context for the targeted fix (e.g. function signatures) is sent to the LLM via your API key.
+- **Read-Only by Default**: The standard scanner will never modify, create, delete, or overwrite any of your project files. It only suggests fixes. If you explicitly pass the `--fix` flag, you are interactively prompted before any file is touched.
 - **Safe Secrets Detection**: Scans for files that might leak secrets (like `.env` or `.pem`), but only flags their unignored presence. It never reads or prints secret key values.
 
 ---
@@ -187,5 +194,6 @@ See [CONTRIBUTING.md](file:///c:/Downloads/opensource%20101/CONTRIBUTING.md) for
 ## Roadmap
 
 Future checks and configurations under consideration:
-- `pyenvprobe fix`: Interactive prompt to safely generate recommended configurations (like `.gitignore` or boilerplate configurations for Ruff).
 - Integration with lockfile validation (Pipfile, poetry.lock, pdm.lock).
+- Auto-fixing syntax formatting directly from Ruff/Black outputs.
+- ML-powered tech debt and vulnerability predictions based on git histories.

@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-08-11
+
+### Added
+- **Smart AI Auto-Fixes (`--ai`)**: Integrate an LLM directly into the CLI by setting the `PYENVPROBE_API_KEY` (or `OPENAI_API_KEY`) environment variable. Install the optional dependency via `pip install pyenvprobe[ai]`.
+- **AI Docstring Generation (`PD403`)**: New AST-based check that finds missing Python docstrings and uses AI to safely generate and suggest PEP-257 compliant docstrings.
+- **AI README Generation**: The `--ai` flag supercharges the documentation checks (`PD301`, `PD303`). It analyzes your project context and writes a beautiful, complete `README.md` for you.
+
 ## [0.2.0] - 2026-08-11
 
 ### Added
