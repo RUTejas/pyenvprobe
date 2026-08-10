@@ -19,7 +19,11 @@ from pyenvprobe.checks.git import (
     check_git_repo,
     check_gitignore_present,
 )
-from pyenvprobe.checks.python import check_python_project, check_python_version
+from pyenvprobe.checks.python import (
+    check_missing_docstrings,
+    check_python_project,
+    check_python_version,
+)
 from pyenvprobe.checks.structure import (
     check_project_layout,
     check_pyproject_toml,
@@ -35,6 +39,7 @@ ALL_CHECKS: list[Callable[[ProjectContext], list[CheckResult]]] = [
     # Python
     check_python_project,
     check_python_version,
+    check_missing_docstrings,
     # Structure
     check_pyproject_toml,
     check_requirements_txt,

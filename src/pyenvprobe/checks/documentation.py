@@ -37,6 +37,7 @@ def check_readme_present(context: ProjectContext) -> list[CheckResult]:
                 severity=Severity.HIGH,
                 message="No README file was found in the project root.",
                 recommendation="Create a README.md file in the root of your project to document its purpose and usage.",
+                fixable=True,
             )
         ]
 
@@ -150,5 +151,6 @@ def check_readme_contents(context: ProjectContext) -> list[CheckResult]:
                 message=f"README appears to be missing standard sections: {missing_str}",
                 recommendation=f"Add clear instructions for {missing_str} in your README file.",
                 metadata={"missing_sections": missing},
+                fixable=True,
             )
         ]

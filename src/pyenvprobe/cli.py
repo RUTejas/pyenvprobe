@@ -11,7 +11,7 @@ from pyenvprobe.output import format_cli_output, format_json_output
 from pyenvprobe.scanner import scan_project
 from pyenvprobe.scoring import calculate_health_score
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -46,6 +46,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--fix",
         action="store_true",
         help="Interactively prompt to automatically apply fixes for supported issues.",
+    )
+    parser.add_argument(
+        "--ai",
+        action="store_true",
+        help="Enable Smart AI Auto-Fixes using PyEnvProbeAI. Requires PYENVPROBE_API_KEY environment variable.",
     )
     parser.add_argument(
         "--ci",
@@ -125,7 +130,18 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"Message: {res.message}")
                 ans = input("Apply this fix? [y/N]: ").strip().lower()
                 if ans in ("y", "yes"):
-                    fix_msg = apply_fix(context, res)
+                    if args.ai and res.id in ("PD301", "PD303", "PD403"):
+                        # Route to AI fixer
+                        try:
+                            from pyenvprobe.ai import apply_ai_fix
+
+                            fix_msg = apply_ai_fix(context, res)
+                        except ImportError as e:
+                            fix_msg = f"Failed to load AI module: {e}"
+                    else:
+                        # Route to standard fixer
+                        fix_msg = apply_fix(context, res)
+
                     if fix_msg:
                         print(f"✓ {fix_msg}")
                     else:
