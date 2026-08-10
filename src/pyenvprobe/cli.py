@@ -5,12 +5,13 @@ import sys
 from pathlib import Path
 
 from pyenvprobe.checks import run_all_checks
+from pyenvprobe.fixer import apply_fix
 from pyenvprobe.models import Severity, Status
 from pyenvprobe.output import format_cli_output, format_json_output
 from pyenvprobe.scanner import scan_project
 from pyenvprobe.scoring import calculate_health_score
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -40,6 +41,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--json",
         action="store_true",
         help="Output results in machine-readable JSON format.",
+    )
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Interactively prompt to automatically apply fixes for supported issues.",
     )
     parser.add_argument(
         "--ci",
@@ -104,6 +110,29 @@ def main(argv: list[str] | None = None) -> int:
     elif not args.quiet:
         cli_str = format_cli_output(context, results, score, verbose=args.verbose)
         print(cli_str)
+
+    # 6. Apply fixes if requested
+    if args.fix:
+        fixable_results = [r for r in results if r.fixable and r.status in (Status.WARN, Status.FAIL)]
+        if fixable_results:
+            print("\n" + "=" * 32)
+            print("Auto-Fix Interactive Mode")
+            print("=" * 32)
+            for res in fixable_results:
+                print(f"\n[Issue] {res.title} ({res.id})")
+                print(f"Message: {res.message}")
+                ans = input("Apply this fix? [y/N]: ").strip().lower()
+                if ans in ("y", "yes"):
+                    fix_msg = apply_fix(context, res)
+                    if fix_msg:
+                        print(f"✓ {fix_msg}")
+                    else:
+                        print("✗ Failed to apply fix or fix not implemented.")
+                else:
+                    print("Skipped.")
+            print("\nNote: Please run pyenvprobe again to verify the fixes.")
+        else:
+            print("\nNo fixable issues found.")
 
     # 6. CI Mode exit logic
     if args.ci:

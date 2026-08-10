@@ -31,6 +31,7 @@ class CheckResult:
     message: str
     recommendation: str
     metadata: dict[str, Any] = field(default_factory=dict)
+    fixable: bool = False
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -42,6 +43,7 @@ class CheckResult:
             "message": self.message,
             "recommendation": self.recommendation,
             "metadata": self.metadata,
+            "fixable": self.fixable,
         }
 
 

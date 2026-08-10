@@ -44,6 +44,7 @@ def check_git_repo(context: ProjectContext) -> list[CheckResult]:
                 severity=Severity.HIGH,
                 message="The project is not initialized as a Git repository.",
                 recommendation="Initialize a Git repository using: git init",
+                fixable=True,
             )
         ]
 
@@ -74,6 +75,7 @@ def check_gitignore_present(context: ProjectContext) -> list[CheckResult]:
                 severity=Severity.HIGH,
                 message="No .gitignore file was found in the project root.",
                 recommendation="Create a .gitignore file to prevent local cache and temp files from being committed.",
+                fixable=True,
             )
         ]
 
@@ -114,6 +116,7 @@ def check_caches_gitignored(context: ProjectContext) -> list[CheckResult]:
                 message=f"Local cache directories/files exist but are not ignored in .gitignore: {unignored_str}",
                 recommendation="Add cache files and directories (like __pycache__, .venv, .pytest_cache) to your .gitignore.",
                 metadata={"unignored_caches": unignored},
+                fixable=True,
             )
         ]
     else:

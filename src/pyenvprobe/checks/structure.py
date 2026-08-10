@@ -105,6 +105,7 @@ def check_tests_dir(context: ProjectContext) -> list[CheckResult]:
                 severity=Severity.MEDIUM,
                 message="No test directory ('tests/' or 'test/') was found.",
                 recommendation="Create a 'tests/' directory in your project root to organize unit and integration tests.",
+                fixable=True,
             )
         ]
 

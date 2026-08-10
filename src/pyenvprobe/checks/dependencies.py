@@ -214,6 +214,7 @@ def check_unwanted_files(context: ProjectContext) -> list[CheckResult]:
                 message=f"Temporary files or build artifacts detected and not gitignored: {unwanted_str}",
                 recommendation="Remove unwanted build/temporary files and add them to your .gitignore.",
                 metadata={"unwanted_files": unwanted},
+                fixable=True,
             )
         ]
     else:
@@ -298,6 +299,7 @@ def check_secrets_exposed(context: ProjectContext) -> list[CheckResult]:
                 message=f"Potential sensitive files are not ignored: {exposed_str}",
                 recommendation="IMMEDIATELY add secret/credential files (like .env or .pem files) to your .gitignore and revoke any leaked credentials.",
                 metadata={"exposed_secrets": exposed},
+                fixable=True,
             )
         ]
     else:
