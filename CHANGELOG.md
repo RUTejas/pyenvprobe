@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-08-11
+
+### Added
+- **Auto-Fix Engine**: Interactive `--fix` flag to automatically resolve supported issues.
+- **Git Initialization Fix (`PD201`)**: Automatically runs `git init`.
+- **Gitignore Fixes (`PD202`, `PD203`, `PD701`, `PD703`)**: Automatically generates standard Python `.gitignore` files and safely appends missing caches, build artifacts, and exposed secrets.
+- **Test Structure Fix (`PD103`)**: Creates `tests/` directory with `__init__.py`.
+- **Python API Support**: Official support and documentation for importing `pyenvprobe` functions in Python scripts.
+
+### Changed
+- **Rebrand**: Fully renamed the internal module and CLI entrypoint to `pyenvprobe` to match the PyPI registry.
+- **Community Standards**: Added `CODE_OF_CONDUCT.md`, Issue Templates, Pull Request Templates, and Dependabot for automated maintenance.
+
 ## [0.1.0] - 2026-08-09
 
 ### Added
