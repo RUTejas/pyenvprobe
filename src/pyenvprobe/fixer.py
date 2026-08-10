@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import subprocess
 
 from pyenvprobe.models import CheckResult, ProjectContext
