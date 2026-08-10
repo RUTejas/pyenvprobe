@@ -11,7 +11,7 @@ from pyenvprobe.output import format_cli_output, format_json_output
 from pyenvprobe.scanner import scan_project
 from pyenvprobe.scoring import calculate_health_score
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:

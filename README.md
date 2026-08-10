@@ -1,7 +1,7 @@
 # pyenvprobe
 
-[![PyPI version](https://img.shields.io/pypi/v/pyenvprobe.svg?v=0.4.0)](https://pypi.org/project/pyenvprobe/)
-[![Python versions](https://img.shields.io/pypi/pyversions/pyenvprobe.svg?v=0.4.0)](https://pypi.org/project/pyenvprobe/)
+[![PyPI version](https://img.shields.io/pypi/v/pyenvprobe.svg?v=0.4.1)](https://pypi.org/project/pyenvprobe/)
+[![Python versions](https://img.shields.io/pypi/pyversions/pyenvprobe.svg?v=0.4.1)](https://pypi.org/project/pyenvprobe/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -20,31 +20,46 @@ While tools like `ruff` lint code, `mypy` checks types, and `pip-audit` scans vu
 
 ## Installation
 
-Install `pyenvprobe` with `pip`:
+`pyenvprobe` is completely cross-platform and works identically on **Ubuntu/Linux, macOS, and Windows**.
 
+### On Ubuntu / Linux & macOS
+Open your terminal and install via `pip3`:
 ```bash
-pip install pyenvprobe
+pip3 install pyenvprobe
+```
+*To enable Smart AI Auto-Fixes:*
+```bash
+pip3 install "pyenvprobe[ai]"
 ```
 
-To enable **Smart AI Auto-Fixes**, install with the `ai` extra:
-```bash
-pip install pyenvprobe[ai]
+### On Windows
+Open PowerShell or Command Prompt and install via `pip`:
+```powershell
+pip install pyenvprobe
+```
+*To enable Smart AI Auto-Fixes:*
+```powershell
+pip install "pyenvprobe[ai]"
 ```
 
 ---
 
 ## Basic Usage
 
-Run the doctor in your current project directory:
+The CLI commands are the exact same across all operating systems (Ubuntu, macOS, and Windows).
 
+Run the doctor in your current project directory:
 ```bash
 pyenvprobe
 ```
 
 Or target a specific path:
-
 ```bash
+# Linux / macOS
 pyenvprobe ./my-project-path
+
+# Windows
+pyenvprobe C:\path\to\my-project
 ```
 
 ### Python API Usage
