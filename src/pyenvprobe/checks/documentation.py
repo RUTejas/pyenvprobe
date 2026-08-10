@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pyenvcheck.models import CheckResult, ProjectContext, Severity, Status
+from pyenvprobe.models import CheckResult, ProjectContext, Severity, Status
 
 README_NAMES = {"readme.md", "readme.rst", "readme.txt", "readme"}
 LICENSE_NAMES = {"license", "license.md", "license.txt", "copying", "copying.txt"}

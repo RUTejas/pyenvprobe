@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pyenvcheck.models import CheckResult, ProjectContext, Severity, Status
+from pyenvprobe.models import CheckResult, ProjectContext, Severity, Status
 
 
 def check_tooling_config(context: ProjectContext) -> list[CheckResult]:

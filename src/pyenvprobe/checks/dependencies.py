@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-from pyenvcheck.models import CheckResult, ProjectContext, Severity, Status
+from pyenvprobe.models import CheckResult, ProjectContext, Severity, Status
 
 # Version operators to check if dependency is pinned or ranged
 VERSION_OPERATORS = ["==", ">=", "<=", "~=", ">", "<", "!=", "@"]

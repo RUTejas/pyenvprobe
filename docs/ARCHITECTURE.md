@@ -1,6 +1,6 @@
-# Architecture: pyenvcheck
+# Architecture: pyenvprobe
 
-This document describes the design and internal architecture of `pyenvcheck`.
+This document describes the design and internal architecture of `pyenvprobe`.
 
 ## Design Goals
 1. **Zero External Runtime Dependencies (on Python 3.11+)**: Keep runtime fast and overhead minimal.

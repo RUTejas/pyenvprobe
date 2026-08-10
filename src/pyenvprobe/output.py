@@ -4,7 +4,7 @@ import json
 import os
 import sys
 
-from pyenvcheck.models import CheckResult, ProjectContext, Status
+from pyenvprobe.models import CheckResult, ProjectContext, Status
 
 # ANSI Escape Codes for Colors
 COLOR_GREEN = "\033[32m"
@@ -87,7 +87,7 @@ def format_cli_output(
         return f"{color_code}{text}{COLOR_RESET}" if use_color else text
 
     lines = []
-    lines.append(color("pyenvcheck Checkup", COLOR_BOLD))
+    lines.append(color("pyenvprobe Checkup", COLOR_BOLD))
     lines.append(separator)
 
     # Group results by category

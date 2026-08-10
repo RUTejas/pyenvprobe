@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Only the latest stable release of `pyenvcheck` is supported with security updates.
+Only the latest stable release of `pyenvprobe` is supported with security updates.
 
 | Version | Supported |
 | --- | --- |
@@ -10,6 +10,6 @@ Only the latest stable release of `pyenvcheck` is supported with security update
 
 ## Reporting a Vulnerability
 
-If you find a security vulnerability in `pyenvcheck`, please do not open a public issue. Instead, report it by emailing the maintainers directly.
+If you find a security vulnerability in `pyenvprobe`, please do not open a public issue. Instead, report it by emailing the maintainers directly.
 
 We will acknowledge your report and coordinate a fix/disclosure timeline.

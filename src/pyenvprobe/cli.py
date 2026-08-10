@@ -4,18 +4,18 @@ import argparse
 import sys
 from pathlib import Path
 
-from pyenvcheck.checks import run_all_checks
-from pyenvcheck.models import Severity, Status
-from pyenvcheck.output import format_cli_output, format_json_output
-from pyenvcheck.scanner import scan_project
-from pyenvcheck.scoring import calculate_health_score
+from pyenvprobe.checks import run_all_checks
+from pyenvprobe.models import Severity, Status
+from pyenvprobe.output import format_cli_output, format_json_output
+from pyenvprobe.scanner import scan_project
+from pyenvprobe.scoring import calculate_health_score
 
 __version__ = "0.1.0"
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        prog="pyenvcheck",
+        prog="pyenvprobe",
         description="A lightweight checkup and health analysis tool for Python projects.",
     )
     parser.add_argument(

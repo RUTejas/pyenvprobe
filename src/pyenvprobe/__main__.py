@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sys
 
-from pyenvcheck.cli import main
+from pyenvprobe.cli import main
 
 if __name__ == "__main__":
     sys.exit(main())

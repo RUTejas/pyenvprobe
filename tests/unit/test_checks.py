@@ -2,34 +2,34 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from pyenvcheck.checks.dependencies import (
+from pyenvprobe.checks.dependencies import (
     check_dependencies_defined,
     check_large_files,
     check_secrets_exposed,
     check_unpinned_dependencies,
     check_unwanted_files,
 )
-from pyenvcheck.checks.documentation import (
+from pyenvprobe.checks.documentation import (
     check_license_present,
     check_readme_contents,
     check_readme_present,
 )
-from pyenvcheck.checks.git import (
+from pyenvprobe.checks.git import (
     check_caches_gitignored,
     check_git_repo,
     check_gitignore_present,
 )
-from pyenvcheck.checks.python import check_python_project, check_python_version
-from pyenvcheck.checks.structure import (
+from pyenvprobe.checks.python import check_python_project, check_python_version
+from pyenvprobe.checks.structure import (
     check_project_layout,
     check_pyproject_toml,
     check_requirements_txt,
     check_tests_dir,
 )
-from pyenvcheck.checks.testing import check_testing_config
-from pyenvcheck.checks.tooling import check_tooling_config
-from pyenvcheck.models import Status
-from pyenvcheck.scanner import GitignoreMatcher, scan_project
+from pyenvprobe.checks.testing import check_testing_config
+from pyenvprobe.checks.tooling import check_tooling_config
+from pyenvprobe.models import Status
+from pyenvprobe.scanner import GitignoreMatcher, scan_project
 
 
 def test_gitignore_matcher() -> None:

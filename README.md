@@ -1,12 +1,17 @@
-# pyenvcheck
+# pyenvprobe
 
-`pyenvcheck` is a lightweight, framework-agnostic Python developer tool that scans your Python projects to diagnose their configuration, code-quality tooling, Git setups, dependency definitions, documentation completeness, and overall repository health.
+[![PyPI version](https://img.shields.io/pypi/v/pyenvprobe.svg)](https://pypi.org/project/pyenvprobe/)
+[![Python versions](https://img.shields.io/pypi/pyversions/pyenvprobe.svg)](https://pypi.org/project/pyenvprobe/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+`pyenvprobe` is a lightweight, framework-agnostic Python developer tool that scans your Python projects to diagnose their configuration, code-quality tooling, Git setups, dependency definitions, documentation completeness, and overall repository health.
 
 It helps developers quickly check if a Python repository is built, configured, and cleaned according to modern ecosystem standards.
 
 ## Why it exists
 
-While tools like `ruff` lint code, `mypy` checks types, and `pip-audit` scans vulnerabilities, `pyenvcheck` acts as a meta-scanner:
+While tools like `ruff` lint code, `mypy` checks types, and `pip-audit` scans vulnerabilities, `pyenvprobe` acts as a meta-scanner:
 1. **Tooling Checkup**: Verifies if these tools (Ruff, Black, pytest, mypy) are actually configured and present in your configuration files.
 2. **Hygiene Auditor**: Detects unignored temporary files (like `.DS_Store`), build artifacts (like `build/`, `dist/`), and caches (like `__pycache__`) that might leak into version control.
 3. **Completeness Checkup**: Ensures essential project meta-files (README with installation/usage sections, LICENSE, `.gitignore`, tests directory) exist.
@@ -15,10 +20,10 @@ While tools like `ruff` lint code, `mypy` checks types, and `pip-audit` scans vu
 
 ## Installation
 
-Install `pyenvcheck` with `pip`:
+Install `pyenvprobe` with `pip`:
 
 ```bash
-pip install pyenvcheck
+pip install pyenvprobe
 ```
 
 ---
@@ -28,18 +33,39 @@ pip install pyenvcheck
 Run the doctor in your current project directory:
 
 ```bash
-pyenvcheck
+pyenvprobe
 ```
 
 Or target a specific path:
 
 ```bash
-pyenvcheck ./my-project-path
+pyenvprobe ./my-project-path
+```
+
+### Python API Usage
+
+You can also import `pyenvprobe` into your own scripts for custom integrations or CI steps:
+
+```python
+from pathlib import Path
+from pyenvprobe.scanner import scan_project
+from pyenvprobe.checks import run_all_checks
+from pyenvprobe.scoring import calculate_health_score
+
+# 1. Scan your project directory
+context = scan_project(Path("./my-project"))
+
+# 2. Run the diagnostic checks
+results = run_all_checks(context)
+
+# 3. Calculate health score
+score = calculate_health_score(results)
+print(f"Project Health Score: {score}/100")
 ```
 
 ### CLI Options
 
-`pyenvcheck` offers several useful arguments:
+`pyenvprobe` offers several useful arguments:
 
 - `path`: (Optional) Path to target directory (default: `.`).
 - `-v, --verbose`: Print detailed diagnostic explanations and recommendations for all checks.
@@ -55,7 +81,7 @@ pyenvcheck ./my-project-path
 
 ### Terminal Output
 ```
-pyenvcheck Checkup
+pyenvprobe Checkup
 ────────────────────────────────
 
 Python
@@ -139,7 +165,7 @@ Project health: 100/100
 
 ## Security & Privacy
 
-`pyenvcheck` is built with a security-first philosophy:
+`pyenvprobe` is built with a security-first philosophy:
 - **Local-Only**: All checks run locally on your machine. No source code or file contents are sent to external servers.
 - **Read-Only**: The tool will never modify, create, delete, or overwrite any of your project files.
 - **Safe Secrets Detection**: Scans for files that might leak secrets (like `.env` or `.pem`), but only flags their unignored presence. It never reads or prints secret key values.
@@ -161,5 +187,5 @@ See [CONTRIBUTING.md](file:///c:/Downloads/opensource%20101/CONTRIBUTING.md) for
 ## Roadmap
 
 Future checks and configurations under consideration:
-- `pyenvcheck fix`: Interactive prompt to safely generate recommended configurations (like `.gitignore` or boilerplate configurations for Ruff).
+- `pyenvprobe fix`: Interactive prompt to safely generate recommended configurations (like `.gitignore` or boilerplate configurations for Ruff).
 - Integration with lockfile validation (Pipfile, poetry.lock, pdm.lock).

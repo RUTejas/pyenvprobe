@@ -1,6 +1,6 @@
-# Diagnostic Checks in pyenvcheck
+# Diagnostic Checks in pyenvprobe
 
-This document outlines the list of diagnostic checks supported by `pyenvcheck` MVP.
+This document outlines the list of diagnostic checks supported by `pyenvprobe` MVP.
 
 ## Summary of Checks
 
@@ -31,8 +31,8 @@ This document outlines the list of diagnostic checks supported by `pyenvcheck` M
 ## Detailed Check Definitions
 
 ### `PD001` - Python project detected
-- **Explanation**: If no Python files (`*.py`) are found in the project directory, `pyenvcheck` cannot perform meaningful analysis.
-- **Recommendation**: Ensure you are running `pyenvcheck` in a directory containing Python code.
+- **Explanation**: If no Python files (`*.py`) are found in the project directory, `pyenvprobe` cannot perform meaningful analysis.
+- **Recommendation**: Ensure you are running `pyenvprobe` in a directory containing Python code.
 
 ### `PD002` - Python version configured
 - **Explanation**: Not specifying a target Python version makes it difficult for dependencies, linters, and type checkers to enforce correctness.

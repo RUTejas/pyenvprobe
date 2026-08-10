@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from pyenvcheck.cli import main
+from pyenvprobe.cli import main
 
 
 def test_cli_help(capsys: pytest.CaptureFixture[str]) -> None:
@@ -13,7 +13,7 @@ def test_cli_help(capsys: pytest.CaptureFixture[str]) -> None:
         main(["--help"])
     assert exc_info.value.code == 0
     captured = capsys.readouterr()
-    assert "pyenvcheck" in captured.out
+    assert "pyenvprobe" in captured.out
     assert "--json" in captured.out
 
 
@@ -22,7 +22,7 @@ def test_cli_version(capsys: pytest.CaptureFixture[str]) -> None:
         main(["--version"])
     assert exc_info.value.code == 0
     captured = capsys.readouterr()
-    assert "pyenvcheck 0.1.0" in captured.out
+    assert "pyenvprobe 0.1.0" in captured.out
 
 
 def test_cli_invalid_path(capsys: pytest.CaptureFixture[str]) -> None:
@@ -55,7 +55,7 @@ def test_cli_run_success(
     exit_code = main([str(temp_project)])
     assert exit_code == 0
     captured = capsys.readouterr()
-    assert "pyenvcheck Checkup" in captured.out
+    assert "pyenvprobe Checkup" in captured.out
     assert "Python files detected" in captured.out
     assert "100/100" in captured.out
 

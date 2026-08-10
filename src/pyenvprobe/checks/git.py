@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pyenvcheck.models import CheckResult, ProjectContext, Severity, Status
+from pyenvprobe.models import CheckResult, ProjectContext, Severity, Status
 
 COMMON_CACHES_DIRS = {
     "__pycache__",

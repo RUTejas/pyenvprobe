@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pyenvcheck.models import CheckResult, Severity, Status
+from pyenvprobe.models import CheckResult, Severity, Status
 
 # Point deductions based on Severity and Status
 DEDUCTIONS = {

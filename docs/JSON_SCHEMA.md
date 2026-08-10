@@ -1,6 +1,6 @@
-# JSON Schema: pyenvcheck Output
+# JSON Schema: pyenvprobe Output
 
-This document defines the schema for the JSON output when `pyenvcheck` is run with the `--json` option.
+This document defines the schema for the JSON output when `pyenvprobe` is run with the `--json` option.
 
 ## JSON Schema Example
 

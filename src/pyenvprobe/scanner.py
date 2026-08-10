@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from pyenvcheck.models import ProjectContext
+from pyenvprobe.models import ProjectContext
 
 # Import tomllib or fallback to tomli
 tomllib: Any = None
