@@ -108,7 +108,7 @@ def check_missing_docstrings(context: ProjectContext) -> list[CheckResult]:
             pass  # Ignore parsing errors for now
 
     if missing:
-        missing_str = ", ".join([m["name"] for m in missing[:3]]) + (
+        missing_str = ", ".join([str(m["name"]) for m in missing[:3]]) + (
             "..." if len(missing) > 3 else ""
         )
         return [

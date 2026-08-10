@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 
 try:
-    from openai import OpenAI
+    from openai import OpenAI  # type: ignore[import-not-found]
 except ImportError:
     OpenAI = None
 
@@ -16,7 +16,7 @@ Do not wrap your final output in markdown code blocks unless requested. Output r
 
 
 class PyEnvProbeAI:
-    def __init__(self):
+    def __init__(self) -> None:
         if OpenAI is None:
             raise ImportError(
                 "The 'openai' package is required for AI features. Install it with: pip install pyenvprobe[ai]"
