@@ -97,9 +97,9 @@ def check_caches_gitignored(context: ProjectContext) -> list[CheckResult]:
     # Check files
     for f in context.files:
         filename = f.split("/")[-1]
-        if filename in COMMON_CACHES_FILES and (not has_gitignore or (
-            matcher and not matcher.is_ignored(f, is_dir=False)
-        )):
+        if filename in COMMON_CACHES_FILES and (
+            not has_gitignore or (matcher and not matcher.is_ignored(f, is_dir=False))
+        ):
             unignored.append(f)
 
     if unignored:

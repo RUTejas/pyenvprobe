@@ -89,9 +89,7 @@ def test_cli_category_filter(
     assert "Structure" not in captured.out  # Should be filtered out
 
 
-def test_cli_ci_mode_pass(
-    temp_project: Path
-) -> None:
+def test_cli_ci_mode_pass(temp_project: Path) -> None:
     # Setup healthy project
     (temp_project / "main.py").write_text("print('hello')")
     (temp_project / "pyproject.toml").write_text(
